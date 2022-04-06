@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     private var filepath_uri: Uri? = null
-    private lateinit var bitMap:Bitmap
+    private lateinit var bitMap: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,25 +32,29 @@ class MainActivity : AppCompatActivity() {
 
     private val mGetContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            Glide
-                .with(this)
-                .load(uri)
-                .centerCrop()
-                .into(binding.ivImage);
-            filepath_uri = uri
 
-            val input_stream= uri?.let { contentResolver.openInputStream(it) }
-            bitMap=BitmapFactory.decodeStream(input_stream)
+            if (uri != null) {
+                Glide
+                    .with(this)
+                    .load(uri)
+                    .centerCrop()
+                    .into(binding.ivImage)
+                filepath_uri = uri
 
-            imageStore(bitMap)
+                val input_stream = uri?.let { contentResolver.openInputStream(it) }
+                bitMap = BitmapFactory.decodeStream(input_stream)
+
+                imageStore(bitMap)
+
+            }
 
 
         }
 
     private fun imageStore(bitMap: Bitmap?) {
 
-        val stream=ByteArrayOutputStream()
-        bitMap?.compress(Bitmap.CompressFormat.JPEG,100,stream)
+        val stream = ByteArrayOutputStream()
+        bitMap?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
 
     }
 }
