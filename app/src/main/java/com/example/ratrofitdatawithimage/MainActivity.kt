@@ -4,11 +4,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ratrofitdatawithimage.databinding.ActivityMainBinding
+import okhttp3.*
 import java.io.ByteArrayOutputStream
+import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -20,12 +26,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         binding.btSelectImage.setOnClickListener {
             mGetContent.launch("image/*")
         }
 
         binding.btInsert.setOnClickListener {
-
 
         }
     }
@@ -55,6 +62,8 @@ class MainActivity : AppCompatActivity() {
 
         val stream = ByteArrayOutputStream()
         bitMap?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+
 
     }
 }

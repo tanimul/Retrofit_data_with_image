@@ -10,7 +10,7 @@ class ApiClient {
     companion object {
         var retrofit: Retrofit? = null
         lateinit var apiInterface: ApiInterface
-        val BASEURL = "https://trigonous.000webhostapp.com/"
+        val BASEURL = "http:/75.119.143.175:8080/ErpNext/"
         fun getClient(): ApiInterface {
             if (retrofit == null) {
                 synchronized(this) {
